@@ -1,0 +1,48 @@
+ % Parameter: Upper left corner; Upper right corner; content; footer; Size Card; Size Content Area; Size Footer / Header
+ \newcommand{\card}[7]{
+   \fbox{
+   \begin{minipage}[t][#5][t]{7cm}
+    \begin{minipage}[t][#7][c]{7cm}
+     #1 \hfill #2
+    \end{minipage}
+    \begin{minipage}[t][#6][c]{7cm}
+     \centering #3
+    \end{minipage}
+    \begin{minipage}[b][#7][c]{7cm}
+     \centering #4
+    \end{minipage}
+   \end{minipage}}
+   \vspace{0.2cm}
+ }
+
+ % Parameter: Upper left corner; Upper right corner; content; footer
+ \newcommand{\moderationCard}[4]{
+    \card{#1}{#2}{#3}{#4}{3.5cm}{2.5cm}{0.5cm}
+   }
+
+ % Parameter: Upper left corner; Upper right corner; content; footer
+ \newcommand{\moderationCardOversize}[4]{
+    \card{#1}{#2}{#3}{#4}{4.5cm}{3.5cm}{0.5cm}
+   }
+ 
+ % Parameter: Number US; Number Goal; Story; Acceptance criteria; language
+ \newcommand{\storyCard}[5]{
+ \begin{minipage}[t][8cm][t]{7cm}
+   \moderationCard{\us{#1}{#5:story}}{\ref{data:goal:#2:#5}}{#3}{-- \textit{Story} --}
+   \moderationCard{\us{#1}{#5:ac}}{\ref{data:goal:#2:#5}}{#4}{-- \textit{Acceptance criteria} --}
+ \end{minipage}}
+ 
+ % Parameter: Number PS; Rating; Content; language
+ \newcommand{\problemStatement}[4]{
+   \moderationCard{\psCard{#1}{#4}}{}{#3}{-- \textit{Rating: #2} --}
+ }
+ 
+ % Parameter: Number PS; Rating; Content; language
+ \newcommand{\problemStatementLong}[4]{
+   \moderationCardOversize{\psCard{#1}{#4}}{}{#3}{-- \textit{Rating: #2} --}
+ }
+ 
+ % Parameter: Number goal; Number PS; Rating; Content; language
+ \newcommand{\goalModerationCard}[5]{
+   \moderationCard{\goalCard{#1}{#5}}{\ref{data:ps:#2:#5}}{#4}{-- \textit{Rating: #3} --}
+ }

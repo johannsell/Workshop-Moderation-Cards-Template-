@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{acro}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[normalem]{ulem}
+\usepackage{svg}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,242mm},
+ left=20mm,
+ top=30mm,
+ }
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}  
+\usepackage[a-1b]{pdfx}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Moderation Cards}
+\fancyhead[RE,LO]{Workshop Data Set}
+\fancyfoot[RE,LO]{\href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[height=0.8cm]{cc-by-sa}}}
+\fancyfoot[LE,RO]{\thepage}
+
+\title{Workshop Data Set\\Moderation Cards}
+\author{Max Mustermann}
+\date{29.01.2020}
+
+% Redefine the plain page style
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[RE,LO]{\href{https://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[height=0.8cm]{cc-by-sa}}}
+  \fancyfoot[LE,RO]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}% Line at the header invisible
+  \renewcommand{\footrulewidth}{0pt}% Footer line not visible with 0pt
+}
+
+% Creates the namedLabel command to set label everywhere inside the text
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+\makeatother
+
+% Stretches the width of the caption of a longtable
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand\getlongtablewidth{%
+ \begingroup
+  \ifcsname LT@\roman{LT@tables}\endcsname
+  \global\longtablewidth=0pt
+  \renewcommand\LT@entry[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}%
+  \@nameuse{LT@\roman{LT@tables}}%
+  \fi
+\endgroup}
+\makeatother
+
+\input{content/abbreviations.tex}
+\input{content/moderation-card}
+
+\newcommand{\ps}[1]{\namedlabel{data:ps:#1}{\ac{ps} #1}}
+\newcommand{\psCard}[2]{\namedlabel{data:ps:#1:#2}{\ac{ps} #1}}
+\newcommand{\goal}[1]{\namedlabel{data:goal:#1}{Goal #1}}
+\newcommand{\goalCard}[2]{\namedlabel{data:goal:#1:#2}{Goal #1}}
+\newcommand{\us}[2]{\namedlabel{data:us:#1:#2}{\ac{us} #1}}
+
+\begin{document}
+
+\maketitle
+
+This document contains the transcribed moderation cards that have been created during the workshop.
+
+\input{content/problem-statements-cards}
+\newpage
+\input{content/goals-cards}
+\newpage
+\input{content/user-stories}
+
+\printacronyms[include-classes=abbrev,name=Abbreviations]
+
+\end{document}
